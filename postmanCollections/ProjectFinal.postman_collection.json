@@ -1,0 +1,726 @@
+{
+	"info": {
+		"_postman_id": "8b0b89d2-32bc-4411-bbbc-74aba3edaabe",
+		"name": "ProjectFinal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37951882"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Octavio",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Sican",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "Osican",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "Osican1234@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "direction",
+									"value": "22av 22-23 zona 5",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Osican|123",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "45788956",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "ADMIN",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3026/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable(\"token\", data.token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userLoggin",
+									"value": "Asican",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Asican|123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3026/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AdminRegister",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Anibal",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Sican",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "Asican",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "Asican1234@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "direction",
+									"value": "22av 22-23 zona 5",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Asican|123",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "45788956",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "ADMIN",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3026/registerAdmin",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"registerAdmin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:3026/v1/product/",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SaveProduct",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Tv",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "De 50 pulgadas",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "67b119b855136ef2ec9f105a",
+									"type": "text"
+								},
+								{
+									"key": "sales",
+									"value": "20",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3026/v1/product/save",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"product",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProduct",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Kinal1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3026/v1/product/update/67b119fd55136ef2ec9f1062",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"product",
+								"update",
+								"67b119fd55136ef2ec9f1062"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOne",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3026/v1/product/get/67af5674aed185a519fbc971",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"product",
+								"get",
+								"67af5674aed185a519fbc971"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProduct",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3026/v1/product/delete/67b118a0a4b6c56a8308edb5",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"product",
+								"delete",
+								"67b118a0a4b6c56a8308edb5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3026/v1/user/",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Pedro",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Armas",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3026/v1/user/update/67af4c7f92dd4920fa4ae197",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"user",
+								"update",
+								"67af4c7f92dd4920fa4ae197"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3026/v1/user/delete/67af4c7f92dd4920fa4ae197",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"user",
+								"delete",
+								"67af4c7f92dd4920fa4ae197"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ChangeRole",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "role",
+									"value": "ADMIN",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3026/v1/user/changerole/67af5e67d5ac786db876091c",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"user",
+								"changerole",
+								"67af5e67d5ac786db876091c"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteWhitAdmin",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "password",
+									"value": "Osican|123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3026/v1/user/deleteAd/67b1154a1b162bf7b1cecb3f",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"user",
+								"deleteAd",
+								"67b1154a1b162bf7b1cecb3f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "SaveCategory",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Carros",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Aceesorios",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3026/v1/category/save",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"category",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:3026/v1/category/",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCategory",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "description",
+									"value": "The shit",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3026/v1/category/update/67af5379bdcfc8d2a3fdc055",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"category",
+								"update",
+								"67af5379bdcfc8d2a3fdc055"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCategoy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3026/v1/category/delete/67b119b855136ef2ec9f105a",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"category",
+								"delete",
+								"67b119b855136ef2ec9f105a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOne",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3026/v1/category/get/67af5379bdcfc8d2a3fdc055",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"category",
+								"get",
+								"67af5379bdcfc8d2a3fdc055"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3020/test",
+					"host": [
+						"localhost"
+					],
+					"port": "3020",
+					"path": [
+						"test"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
