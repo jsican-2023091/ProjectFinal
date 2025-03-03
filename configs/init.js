@@ -15,8 +15,8 @@ export const createAdminUser = async () => {
 
         const user = new User (
             {
-                name: 'Jeff',
-                surname: 'Sican',
+                name: 'Admin',
+                surname: 'Admin',
                 username: 'Admin',
                 email: 'Admin123@gmail.com',
                 password: passwordHaah,
