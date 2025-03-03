@@ -98,57 +98,62 @@ export const deleteCart = async (req, res) => {
     }
 }
 
-export const updateCart = async (req, res) => {
+
+export const deleteProductCart = async (req, res) => {
     try {
-        const { userId, productId, amount } = req.body
+        const { userId, productId } = req.body
 
         // Buscar el carrito del usuario
         let cart = await Cart.findOne({ user: userId }).populate('products.product')
 
         if (!cart) {
-            return res.status(404).send({
-                success: false,
-                message: 'Cart not found'
-            })
+            return res.status(404).json({ success: false, message: 'Cart not found' })
         }
 
         // Buscar el producto en el carrito
         const productIndex = cart.products.findIndex(item => item.product._id.toString() === productId)
-
+        
         if (productIndex === -1) {
-            return res.status(404).send({
-                success: false,
-                message: 'Product not found in cart'
-            })
+            return res.status(404).json({ success: false, message: 'Product not found in cart' })
         }
 
-        if (amount > 0) {
-            // Si la cantidad es mayor a 0, actualizarla
-            cart.products[productIndex].amount = amount
-        } else {
-            // Si la cantidad es 0, eliminar el producto del carrito
-            cart.products.splice(productIndex, 1)
-        }
+        // Obtener la cantidad del producto antes de eliminarlo
+        const removedProduct = cart.products[productIndex]
+
+        // Eliminar el producto del carrito
+        cart.products.splice(productIndex, 1)
 
         // Recalcular el total del carrito
         cart.total = cart.products.reduce((sum, item) => {
-            return sum + item.product.price * item.amount
+            const productPrice = item.product.price || 0
+            if (isNaN(productPrice)) {
+                throw new Error('Invalid product price')
+            }
+            return sum + (productPrice * item.amount)
         }, 0)
 
-        // Guardar los cambios en el carrito
+        // Devolver el stock del producto
+        const product = await Product.findById(productId)
+        if (product) {
+            product.stock += removedProduct.amount
+            product.sales -= removedProduct.amount
+            await product.save()
+        }
+
+        // Guardar el carrito actualizado
         await cart.save()
 
-        return res.status(200).send({
+        return res.status(200).json({
             success: true,
-            message: 'Cart updated successfully',
+            message: 'Product removed from cart successfully',
             cart
         })
     } catch (error) {
         console.error(error)
-        return res.status(500).send({
+        return res.status(500).json({
             success: false,
-            message: 'Error updating cart',
-            error
+            message: 'Error removing product from cart',
+            error: error.message
         })
     }
 }

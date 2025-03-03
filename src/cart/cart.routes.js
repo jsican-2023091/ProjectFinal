@@ -1,6 +1,6 @@
 //Rutas dse carrito
 import { Router } from "express"
-import { addToCart, deleteCart, updateCart } from "./cart.controller.js"
+import { addToCart, deleteCart, deleteProductCart } from "./cart.controller.js"
 
 const api = Router()
 
@@ -9,9 +9,9 @@ api.post(
     addToCart
 )
 
-api.put(
-    '/update/:id',
-    updateCart
+api.delete(
+    '/deleteproduct',
+    deleteProductCart
 )
 
 api.delete(
