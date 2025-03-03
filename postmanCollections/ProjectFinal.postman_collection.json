@@ -19,7 +19,7 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Octavio",
+									"value": "Jeff",
 									"type": "text"
 								},
 								{
@@ -29,12 +29,12 @@
 								},
 								{
 									"key": "username",
-									"value": "Osican",
+									"value": "Jsican",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "Osican1234@gmail.com",
+									"value": "Jsican1234@gmail.com",
 									"type": "text"
 								},
 								{
@@ -44,7 +44,7 @@
 								},
 								{
 									"key": "password",
-									"value": "Osican|123",
+									"value": "Jsican|123",
 									"type": "text"
 								},
 								{
@@ -54,8 +54,9 @@
 								},
 								{
 									"key": "role",
-									"value": "ADMIN",
-									"type": "text"
+									"value": "",
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
@@ -95,12 +96,12 @@
 							"urlencoded": [
 								{
 									"key": "userLoggin",
-									"value": "Asican",
+									"value": "Jsican",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "Asican|123",
+									"value": "Jsican|123",
 									"type": "text"
 								}
 							]
@@ -199,7 +200,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3026/v1/product/",
+							"raw": "localhost:3026/v1/product/?limit=5",
 							"host": [
 								"localhost"
 							],
@@ -208,6 +209,12 @@
 								"v1",
 								"product",
 								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
 							]
 						}
 					},
@@ -229,32 +236,32 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Tv",
+									"value": "Consola",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "De 50 pulgadas",
+									"value": "Consola de videoJuegos PS4",
 									"type": "text"
 								},
 								{
 									"key": "price",
-									"value": "100",
+									"value": "650",
 									"type": "text"
 								},
 								{
 									"key": "stock",
-									"value": "5",
+									"value": "10",
 									"type": "text"
 								},
 								{
 									"key": "category",
-									"value": "67b119b855136ef2ec9f105a",
+									"value": "67c62c4258bb8ef234251eef",
 									"type": "text"
 								},
 								{
 									"key": "sales",
-									"value": "20",
+									"value": "1",
 									"type": "text"
 								}
 							]
@@ -290,13 +297,13 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Kinal1",
+									"value": "Messi",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "localhost:3026/v1/product/update/67b119fd55136ef2ec9f1062",
+							"raw": "localhost:3026/v1/product/update/67b119cf55136ef2ec9f105e",
 							"host": [
 								"localhost"
 							],
@@ -305,7 +312,7 @@
 								"v1",
 								"product",
 								"update",
-								"67b119fd55136ef2ec9f1062"
+								"67b119cf55136ef2ec9f105e"
 							]
 						}
 					},
@@ -323,7 +330,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3026/v1/product/get/67af5674aed185a519fbc971",
+							"raw": "localhost:3026/v1/product/get/",
 							"host": [
 								"localhost"
 							],
@@ -332,7 +339,7 @@
 								"v1",
 								"product",
 								"get",
-								"67af5674aed185a519fbc971"
+								""
 							]
 						}
 					},
@@ -364,6 +371,52 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GetOnealazar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3026/v1/product/getOne",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"product",
+								"getOne"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MostSold",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3026/v1/product/mostSold?limit",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"product",
+								"mostSold"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -382,7 +435,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3026/v1/user/",
+							"raw": "localhost:3026/v1/user/?limit=5",
 							"host": [
 								"localhost"
 							],
@@ -391,6 +444,12 @@
 								"v1",
 								"user",
 								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
 							]
 						}
 					},
@@ -417,7 +476,7 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:3026/v1/user/update/67af4c7f92dd4920fa4ae197",
+							"raw": "localhost:3026/v1/user/update/67c5c46d2c35f2e64b41e377",
 							"host": [
 								"localhost"
 							],
@@ -426,7 +485,7 @@
 								"v1",
 								"user",
 								"update",
-								"67af4c7f92dd4920fa4ae197"
+								"67c5c46d2c35f2e64b41e377"
 							]
 						}
 					},
@@ -436,9 +495,25 @@
 					"name": "DeleteUser",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "password",
+									"value": "Rhernandez|123",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "localhost:3026/v1/user/delete/67af4c7f92dd4920fa4ae197",
+							"raw": "localhost:3026/v1/user/delete/67c5e0e184b75c2ec85f0b3f",
 							"host": [
 								"localhost"
 							],
@@ -447,7 +522,7 @@
 								"v1",
 								"user",
 								"delete",
-								"67af4c7f92dd4920fa4ae197"
+								"67c5e0e184b75c2ec85f0b3f"
 							]
 						}
 					},
@@ -555,12 +630,12 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Carros",
+									"value": "Casa",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Aceesorios",
+									"value": "Todo tipo cosas para el hogar",
 									"type": "text"
 								}
 							]
@@ -697,6 +772,236 @@
 								"category",
 								"get",
 								"67af5379bdcfc8d2a3fdc055"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoice",
+			"item": [
+				{
+					"name": "SaveInvoice",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userId",
+									"value": "67c635e2bb8c328c8e47e90b",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3026/v1/invoice/saveInvoice",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"invoice",
+								"saveInvoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "History",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3026/v1/invoice/history/67c5b1d7609cfe573d3b5276",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"invoice",
+								"history",
+								"67c5b1d7609cfe573d3b5276"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompleteInvoice",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "invoiceId",
+									"value": "67c63761c394331fca78cce2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3026/v1/invoice/complete",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"invoice",
+								"complete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CancelInvoice",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "invoiceId",
+									"value": "67c63761c394331fca78cce2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3026/v1/invoice/cancel",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"invoice",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userId",
+									"value": "67c635e2bb8c328c8e47e90b",
+									"type": "text"
+								},
+								{
+									"key": "productId",
+									"value": "67c62cd458bb8ef234251f01",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3026/v1/cart/save",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"cart",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3026/v1/cart/delete/67c5b1d7609cfe573d3b5276",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"cart",
+								"delete",
+								"67c5b1d7609cfe573d3b5276"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProduct",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userId",
+									"value": "67c635e2bb8c328c8e47e90b",
+									"type": "text"
+								},
+								{
+									"key": "productId",
+									"value": "67c62cd458bb8ef234251f01",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3026/v1/cart/deleteproduct",
+							"host": [
+								"localhost"
+							],
+							"port": "3026",
+							"path": [
+								"v1",
+								"cart",
+								"deleteproduct"
 							]
 						}
 					},
