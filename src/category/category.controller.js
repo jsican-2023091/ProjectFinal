@@ -17,6 +17,7 @@ export const categoryRegister = async(req, res)=>{
         console.error(err)
         return res.status(500).send(
             {
+                success: false,
                 message: 'General Error with rigestering Product',
                 err
             }
@@ -35,14 +36,14 @@ export const getAll = async(req, res)=>{
             return res.send(
                 {
                     success: false,
-                    message: 'Categories not Found :('
+                    message: 'Categories not Found'
                 }
             )
         }
         return res.send(
             {
                 success: true,
-                message: 'Categories found :)',
+                message: 'Categories found',
                 total: categories.length,
                 categories
             }
@@ -123,7 +124,7 @@ export const update = async(req, res)=>{
     }
 }
 
-//Eliminar y actualiza
+//Eliminar y actualiza el producto
 export const deleteCategory = async (req, res) => {
     try {
         const { id } = req.params

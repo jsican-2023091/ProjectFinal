@@ -1,3 +1,4 @@
+//Rutas de categoria
 import { Router } from "express"
 import { categoryRegister, deleteCategory, getAll, getOne, update } from "./category.controller.js"
 import { isAdmin, validateJwt } from "../../middlewares/validate.jwt.js"

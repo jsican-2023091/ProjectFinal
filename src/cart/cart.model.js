@@ -21,8 +21,12 @@ const cartSchema = Schema(
                     min: 1
                 }
             }
-        ]
+        ],
+        total: {
+            type: Number,
+            default: 0
+        }
     }
 )
 //Exportar y crear el modelo
-export default cart('Cart', cartSchema)
+export default model('Cart', cartSchema)

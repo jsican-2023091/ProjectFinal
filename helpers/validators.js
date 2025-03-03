@@ -36,9 +36,8 @@ export const loginValidation = [
     body('password', 'Password cannot be empty')
         .notEmpty()
         .isStrongPassword()
-        .isLength()
-        .withMessage('The password must be strong')
-        .isLength({min: 8}),
+        .isLength({min: 8})
+        .withMessage('The password must be strong'),
     validateErrorWithoutImg
 ]
 

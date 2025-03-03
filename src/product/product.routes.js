@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { get, getAll, productRegister, update , deleteProduct  } from './product.controller.js'
+import { get, getAll, productRegister, update , deleteProduct, getOne, getMostSold  } from './product.controller.js'
 import { isAdmin, validateJwt } from '../../middlewares/validate.jwt.js'
 import { validRegisProduct, validUpdateProduct } from '../../helpers/validators.js'
 
@@ -24,7 +24,10 @@ api.post(
     productRegister
 )
 
-
+api.get(
+    '/getOne',
+    getOne
+)
 api.get(
     '/get/:id',
     [
@@ -34,6 +37,10 @@ api.get(
     get
 )
 
+api.get(
+    '/mostSold',
+    getMostSold
+)
 api.put(
     '/update/:id',
     [

@@ -64,6 +64,38 @@ export const getAll = async(req, res)=>{
         )
     }
 }
+export const getOne = async(req, res)=>{
+    try {
+        const { limit = 1, skip = 0} = req.query
+        const products = await Product.find()
+            .skip(skip)
+            .limit(limit)
+        if(products.length === 0) return res.status(400).send(
+            {
+                success: false,
+                message: 'Products not found'
+            }
+        )
+        return res.send(
+            {
+                success: true,
+                message: 'Products found',
+                total: products.length,
+                products
+            }
+        )
+
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send(
+            {
+                success: false,
+                message: 'General Error',
+                err
+            }
+        )
+    }
+}
 
 //Buscar 1 Producto
 export const get = async(req, res)=>{
@@ -161,3 +193,36 @@ export const deleteProduct = async(req, res)=>{
     }
 }
 
+// Listar los productos más vendidos
+export const getMostSold = async(req, res) => {
+    try {
+        const { limit = 10, skip = 0 } = req.query;
+        
+        // Obtener los productos más vendidos, ordenados por la cantidad de ventas de mayor a menor
+        const products = await Product.find()
+            .sort({ sales: -1 })  // Ordenar por el campo 'sales' en orden descendente
+            .skip(skip)
+            .limit(limit);
+
+        if (products.length === 0) {
+            return res.status(400).send({
+                success: false,
+                message: 'No products found'
+            });
+        }
+
+        return res.send({
+            success: true,
+            message: 'Most sold products found',
+            total: products.length,
+            products
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({
+            success: false,
+            message: 'General Error',
+            err
+        });
+    }
+}

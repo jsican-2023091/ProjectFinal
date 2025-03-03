@@ -1,16 +1,16 @@
 //Rutas de factura
 import { Router } from "express"
-import { getAll, invoiceSave } from "./invoice.controller.js"
+import { createInvoice, purchaseHistory } from "./invoice.controller.js"
 
 const api = Router()
 
-api.get(
-    '/getAll',
-    getAll
+api.post(
+    '/saveInvoice',
+    createInvoice
 )
 
-api.put(
-    '/save',
-    invoiceSave
+api.get(
+    '/history/:id',
+    purchaseHistory
 )
 export default api
