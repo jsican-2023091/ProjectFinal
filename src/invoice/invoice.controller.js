@@ -2,6 +2,7 @@
 import Invoice from '../invoice/invoice.model.js'
 import Cart from '../cart/cart.model.js'
 import Product from '../product/product.model.js'
+import User from '../user/user.model.js'
 
 export const createInvoice = async (req, res) => {
     try {
@@ -33,9 +34,8 @@ export const createInvoice = async (req, res) => {
             cart: cart._id,
             products,
             total,
-            paymentStatus: 'pending'
+            status: 'PENDING'
         })
-
         // Guardar la facture en la base de datos
         await invoice.save()
 
@@ -44,43 +44,141 @@ export const createInvoice = async (req, res) => {
             message: 'Invoice created successfully',
             invoice
         })
-    } catch (error) {
-        console.error(error)
+    } catch (err) {
+        console.error(err)
         return res.status(500).send({
             success: false,
             message: 'Error creating facture',
-            error
+            err
         })
     }
 }
 
-
-export const purchaseHistory = async(req,res) => {
+export const completePurchase = async (req, res) => {
     try {
-        const { userId } = req.params // Obtener el ID
+        const { invoiceId } = req.body // Se espera que el ID de la factura sea enviado en el cuerpo de la solicitud
 
-        // Buscar todas las facturas del usuario
-        const invoices = await Invoice.find({ user: userId })
-            .populate('products.product', 'name price')
-            .sort({ createdAt: -1 }) // Ordenar por fecha, de la más reciente a la más antigua
+        // Buscar la factura por ID
+        const invoice = await Invoice.findById(invoiceId)
 
-        if (invoices.length === 0) {
+        if (!invoice) {
             return res.status(404).send({
                 success: false,
-                message: 'No purchase history found'
+                message: 'Invoice not found'
             })
         }
+
+        // Cambiar el estado de la factura a "COMPLETE"
+        invoice.status = 'COMPLETE'
+
+        // Guardar la factura con el nuevo estado
+        await invoice.save()
+
         return res.status(200).send({
             success: true,
-            message: 'Purchase history retrieved successfully',
-            history: invoices
+            message: 'Invoice status updated to COMPLETE successfully',
+            invoice
         })
-    } catch (error) {
-        console.error(error)
+    } catch (err) {
+        console.error(err)
         return res.status(500).send({
             success: false,
-            message: 'Error retrieving purchase history',
-            error
+            message: 'Error completing purchase',
+            err
         })
+    }
+}
+
+export const cancelInvoice = async (req, res) => {
+    try {
+        const { invoiceId } = req.body // Se espera que el ID de la factura sea enviado en el cuerpo de la solicitud
+
+        // Buscar la factura por ID
+        const invoice = await Invoice.findById(invoiceId)
+
+        if (!invoice) {
+            return res.status(404).send({
+                success: false,
+                message: 'Invoice not found'
+            })
+        }
+
+        // Cambiar el estado de la factura a "CANCELLED"
+        invoice.status = 'CANCELED'
+
+        // Guardar la factura con el nuevo estado
+        await invoice.save()
+
+        return res.status(200).send({
+            success: true,
+            message: 'Invoice status updated to CANCELLED successfully',
+            invoice
+        })        
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({
+            success:false,
+            message: 'Error updating invoice status',
+            err
+        })
+    }
+}
+
+// Obtener historial de compras de un usuario
+export const purchaseHistory = async (req, res) => {
+    try {
+        const userId = req.user.uid  
+ 
+        // Verificar si el usuario existe
+        const user = await User.findById(userId)
+        if (!user) {
+            return res.status(404).send({
+                success: false,
+                message: 'User not found.'
+            })
+        }
+ 
+        // Obtener las facturas asociadas al usuario, con populate para obtener los detalles de los productos
+        const invoices = await Invoice.find({ user: userId })
+            .populate(
+                {
+                    path: 'user',
+                    select: 'name -_id'
+                }
+            )
+            .populate(
+                {
+                    path: 'products.product',
+                    select: 'name price -_id'  
+                }
+            )
+ 
+ 
+        if (!invoices || invoices.length === 0) {
+            return res.status(404).send(
+                {
+                    success: false,
+                    message: 'No purchase history found.'
+                }
+            )
+        }
+ 
+        return res.send(
+            {
+                success: true,
+                message: 'Purchase history retrieved successfully.',
+                invoices
+            }
+        )
+ 
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send(
+            {
+                success: false,
+                message: 'Error retrieving purchase history.',
+                err
+            }
+        )
     }
 }

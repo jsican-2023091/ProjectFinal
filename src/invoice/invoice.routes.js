@@ -1,6 +1,7 @@
 //Rutas de factura
 import { Router } from "express"
-import { createInvoice, purchaseHistory } from "./invoice.controller.js"
+import { cancelInvoice, completePurchase, createInvoice, purchaseHistory } from "./invoice.controller.js"
+import { validateJwt } from "../../middlewares/validate.jwt.js"
 
 const api = Router()
 
@@ -11,6 +12,19 @@ api.post(
 
 api.get(
     '/history/:id',
+    [
+      validateJwt  
+    ],
     purchaseHistory
+)
+
+api.post(
+  '/complete',
+  completePurchase
+)
+
+api.post(
+  '/cancel',
+  cancelInvoice
 )
 export default api
