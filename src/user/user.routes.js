@@ -27,8 +27,7 @@ api.put(
 api.delete(
     '/delete/:id',
     [
-        validateJwt,
-        isAdmin
+        validateJwt
     ],
     deleteUser
 )

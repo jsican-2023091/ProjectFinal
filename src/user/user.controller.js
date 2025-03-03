@@ -95,7 +95,10 @@ export const deleteUser = async (req, res) => {
         )
 
         // Eliminar usuario
-        await User.findByIdAndDelete(id)
+        // await User.findByIdAndDelete(id)
+        user.status = false
+
+        await user.save()
 
         return res.send(
             {
@@ -204,7 +207,7 @@ export const deleteUserAdmin = async (req, res) => {
         // Verificar si el usuario autenticado es admin
         if (requestingUser.role === 'admin') {
             // El admin solo puede eliminar clientes o a sí mismo
-            if (userToDelete.role !== 'client' && requestingUser.id !== id) {
+            if (userToDelete.role !== 'CLIENT' && requestingUser.id !== id) {
                 return res.status(403).send({
                     success: false,
                     message: 'Admins can only delete clients or their own account'
@@ -222,7 +225,8 @@ export const deleteUserAdmin = async (req, res) => {
         }
 
         // Eliminar usuario
-        await User.findByIdAndDelete(id)
+            // await User.findByIdAndDelete(id)
+            userToDelete.status = false
 
         return res.send({
             success: true,
